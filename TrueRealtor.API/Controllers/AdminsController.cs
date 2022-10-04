@@ -1,11 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TrueRealtor.API.Extensions;
 using TrueRealtor.API.Requests;
 using TrueRealtor.Business.Interfaces;
 using TrueRealtor.Data.Entities;
 
 namespace TrueRealtor.API.Controllers;
 
+[Authorize]
+[ApiController]
+[Route("[controller]")]
 public class AdminsController : Controller
 {
     private readonly IAdminsService _adminsService;
@@ -20,9 +25,9 @@ public class AdminsController : Controller
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<Action<int>> AddApartment([FromBody] ApartmentRequest apartmentToAdd)
+    public async Task<ActionResult<int>> AddApartment([FromBody] ApartmentRequest apartmentToAdd)
     {
         var result = await _adminsService.AddApartment(_mapper.Map<Apartment>(apartmentToAdd));
-        
+        return Created($"{this.GetUri()}/{result}", result);
     }
 }
