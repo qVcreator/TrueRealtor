@@ -4,5 +4,5 @@ namespace TrueRealtor.Business.Interfaces;
 
 public interface IAdminsService
 {
-    void AddApartment(Apartment apartment);
+    Task<int> AddApartment(Apartment apartment);
 }
