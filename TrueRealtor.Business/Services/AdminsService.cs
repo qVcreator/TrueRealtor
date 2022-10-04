@@ -16,6 +16,8 @@ public class AdminsService : IAdminsService
     public async Task<int> AddApartment(Apartment apartment)
     {
         //Add checking on existing similar item
+        apartment.DateCreated = DateTime.Now;
+
         var result = await _adminsRepository.AddApartment(apartment);
 
         return result;

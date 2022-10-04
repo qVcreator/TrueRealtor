@@ -9,5 +9,7 @@ public class Apartment
     public int CityId { get; set; }
     public byte RoomCount { get; set; }
     public string Address { get; set; }
+    public DateTime DateCreated { get; set; }
+    public DateTime? DateUpdate { get; set; }
     public Status Status { get; set; }
 }
