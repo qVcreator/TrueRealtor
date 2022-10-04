@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TrueRealtor.API.CustomAttributes;
 using TrueRealtor.API.Extensions;
 using TrueRealtor.API.Requests;
 using TrueRealtor.Business.Interfaces;
@@ -23,6 +24,7 @@ public class AdminsController : Controller
     }
 
     [HttpPost]
+    [AuthorizeByRole]
     [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<ActionResult<int>> AddApartment([FromBody] ApartmentRequest apartmentToAdd)
