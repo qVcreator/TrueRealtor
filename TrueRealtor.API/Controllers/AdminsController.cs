@@ -24,7 +24,8 @@ public class AdminsController : Controller
     }
 
     [HttpPost]
-    [AuthorizeByRole]
+    //[AuthorizeByRole] (Temporarily disabled)
+    [AllowAnonymous]
     [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<ActionResult<int>> AddApartment([FromBody] ApartmentRequest apartmentToAdd)
