@@ -7,6 +7,7 @@ namespace TrueRealtor.Data
     public class TrueRealtorContext : DbContext
     {
         public DbSet<Apartment> Apartments { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public TrueRealtorContext(DbContextOptions<TrueRealtorContext> options) 
             : base(options)
@@ -24,6 +25,14 @@ namespace TrueRealtor.Data
 
                 entity.Property(a => a.Address).HasMaxLength(DbConstant.AddressMaxLenght);
             });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable(nameof(User));
+
+                entity.HasKey(u => u.Id);
+            });
+
         }
     }
 }
