@@ -82,6 +82,7 @@ public static class WebApplicationBuilderExtension
 
         services.AddScoped<IApartmentsService, ApartmentsService>();
         services.AddScoped<IApartmentsRepository, ApartmentsRepository>();
+        services.AddScoped<IAuthService, AuthService>();
 
         services.AddAutoMapper(typeof(MapperConfig));
     }
