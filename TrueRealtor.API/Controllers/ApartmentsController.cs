@@ -12,14 +12,14 @@ namespace TrueRealtor.API.Controllers;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class AdminsController : Controller
+public class ApartmentsController : Controller
 {
-    private readonly IAdminsService _adminsService;
+    private readonly IApartmentsService _apartmentsService;
     private readonly IMapper _mapper;
 
-    public AdminsController(IAdminsService adminsService, IMapper mapper)
+    public ApartmentsController(IApartmentsService apartmentsService, IMapper mapper)
     {
-        _adminsService = adminsService;
+        _apartmentsService = apartmentsService;
         _mapper = mapper;
     }
 
@@ -30,7 +30,19 @@ public class AdminsController : Controller
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<ActionResult<int>> AddApartment([FromBody] ApartmentRequest apartmentToAdd)
     {
-        var result = await _adminsService.AddApartment(_mapper.Map<Apartment>(apartmentToAdd));
+        var result = await _apartmentsService.AddApartment(_mapper.Map<Apartment>(apartmentToAdd));
         return Created($"{this.GetUri()}/{result}", result);
     }
+
+    [HttpPut("{id}")]
+    //[AuthorizeByRole]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    public async Task<ActionResult<int>> UpdateApartment([FromRoute] int id, [FromBody] UpdateApartmentRequest apartmentToUpdate)
+    {
+        await _apartmentsService.UpdateAppartment(id, _mapper.Map<Apartment>(apartmentToUpdate));
+        return NoContent();
+    }
+
 }

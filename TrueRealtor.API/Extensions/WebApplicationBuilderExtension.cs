@@ -80,8 +80,8 @@ public static class WebApplicationBuilderExtension
             b.UseSqlServer(System.Environment.GetEnvironmentVariable("TRUEREALTORE_CONNECTION_STRING", EnvironmentVariableTarget.Machine)!);
         });
 
-        services.AddScoped<IAdminsService, AdminsService>();
-        services.AddScoped<IAdminsRepository, AdminsRepository>();
+        services.AddScoped<IApartmentsService, ApartmentsService>();
+        services.AddScoped<IApartmentsRepository, ApartmentsRepository>();
 
         services.AddAutoMapper(typeof(MapperConfig));
     }

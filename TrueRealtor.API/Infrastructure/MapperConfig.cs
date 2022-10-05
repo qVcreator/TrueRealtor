@@ -9,5 +9,6 @@ public class MapperConfig : Profile
     public MapperConfig()
     {
         CreateMap<ApartmentRequest, Apartment>();
+        CreateMap<UpdateApartmentRequest, Apartment>();
     }
 }

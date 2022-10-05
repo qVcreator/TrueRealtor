@@ -2,7 +2,9 @@
 
 namespace TrueRealtor.Data.Interfaces;
 
-public interface IAdminsRepository
+public interface IApartmentsRepository
 {
     Task<int> AddApartment(Apartment apartment);
+    Task<Apartment?> GetApartmentById(int id);
+    Task UpdateApartment(Apartment apartment);
 }
