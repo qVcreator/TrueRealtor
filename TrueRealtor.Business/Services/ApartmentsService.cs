@@ -1,4 +1,6 @@
 ﻿using TrueRealtor.Business.Interfaces;
+using TrueRealtor.Data.Constants;
+using TrueRealtor.Data.CustomExceptions;
 using TrueRealtor.Data.Entities;
 using TrueRealtor.Data.Interfaces;
 
@@ -15,7 +17,7 @@ public class ApartmentsService : IApartmentsService
 
     public async Task<int> AddApartment(Apartment apartment)
     {
-        //Add checking on existing similar item?
+        //Add checking on existing similar item later
         apartment.DateCreated = DateTime.Now;
 
         var result = await _apartmentsRepository.AddApartment(apartment);
@@ -28,7 +30,7 @@ public class ApartmentsService : IApartmentsService
         var apartmentToUpdate = await _apartmentsRepository.GetApartmentById(id);
 
         if (apartmentToUpdate is null)
-            throw new Exception();// later custom exception
+            throw new EntityNotFoundException(ExceptionMessage.EntityNotFound);
 
         apartmentToUpdate.DateUpdate = DateTime.Now;
         apartmentToUpdate.Status = apartment.Status;

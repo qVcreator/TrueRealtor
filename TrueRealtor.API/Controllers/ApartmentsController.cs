@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TrueRealtor.API.CustomAttributes;
 using TrueRealtor.API.Extensions;
 using TrueRealtor.API.Requests;
 using TrueRealtor.Business.Interfaces;
@@ -38,6 +37,7 @@ public class ApartmentsController : Controller
     //[AuthorizeByRole]
     [AllowAnonymous]
     [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<ActionResult<int>> UpdateApartment([FromRoute] int id, [FromBody] UpdateApartmentRequest apartmentToUpdate)
     {

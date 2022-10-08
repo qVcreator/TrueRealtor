@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using TrueRealtor.API.Models;
+using TrueRealtor.Data.CustomExceptions;
 
 namespace TrueRealtor.API.Customs;
 
@@ -17,6 +18,10 @@ public class ExceptionMiddleware
         try
         {
             await _next(httpContext);
+        }
+        catch(EntityNotFoundException error)
+        {
+            await HandleExceptionAsync(httpContext, HttpStatusCode.BadRequest, error.Message);
         }
         catch(Exception error)
         {
